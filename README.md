@@ -3,7 +3,7 @@
 Ecrivez une requête SQL qui affiche tous les titres et descriptions des films dont la description contient le mot Amazing.
 
 ```sql
-
+dvdrental=> SELECT title, description FROM film WHERE description LIKE '%Amazing%';
 ```
 
 # Exercices 2 :
@@ -11,7 +11,7 @@ Ecrivez une requête SQL qui affiche tous les titres et descriptions des films d
 Ecrivez une requête SQL qui récupère tous les paiements supérieurs à 10. Il faudra récupérer l'id, le prénom, le nom du client ainsi que le montant et la date du paiement.
 
 ```sql
-
+dvdrental=> SELECT payment.customer_id, customer.first_name, customer.last_name, payment.amount, payment.payment_date FROM payment INNER JOIN customer ON payment.customer_id = customer.customer_id WHERE amount > 10;
 ```
 
 # Exercice 3 :
@@ -19,6 +19,11 @@ Ecrivez une requête SQL qui récupère tous les paiements supérieurs à 10. Il
 Ecrivez une requête SQL qui affiche le chiffre d'affaire gagné par le video club depuis son ouverture.
 
 ```sql
+dvdrental=> SELECT SUM(amount) FROM payment;
+   sum
+----------
+ 61312.04
+(1 row)
 
 ```
 
@@ -27,7 +32,7 @@ Ecrivez une requête SQL qui affiche le chiffre d'affaire gagné par le video cl
 Ecrivez une requête SQL qui affiche le titre de tous les films dont la langue est l'anglais et dont la durée est supérieure à 120 minutes.
 
 ```sql
-
+dvdrental=> SELECT title  FROM film WHERE language_id=1 AND length>120;
 ```
 
 # Exercices 5 :
