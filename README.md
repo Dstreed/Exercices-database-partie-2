@@ -40,7 +40,9 @@ dvdrental=> SELECT title  FROM film WHERE language_id=1 AND length>120;
 Ecrivez une requête SQL qui affiche le TOP 10 des clients qui ont fait le plus d'achat dans ce video club. Il faudra récupérer leur id, prénom, nom, email. Il vous faudra utiliser les requêtes auxiliaires avec WITH pour cette exercice.
 
 ```sql
-
+WITH customer_total AS (SELECT customer_id, SUM(amount) total_amount FROM payment GROUP BY customer_id ORDER
+ BY total_amount DESC LIMIT 10) SELECT customer_id, first_name, last_name, email FROM customer WHERE customer_id IN (SEL
+ECT customer_id FROM customer_total);
 ```
 
 # Exercice 6 :
@@ -48,13 +50,6 @@ Ecrivez une requête SQL qui affiche le TOP 10 des clients qui ont fait le plus 
 Récupérer les mêmes informations que l'exercice précédent, mais ajouter avec un JOIN le montant total des achats pour chacun du TOP 10 des clients.
 
 ```sql
-
-```
-
-# Exercice 7 :
-
-Faîtes preuves d'imagination et essayez de créer une requête très complexes que vous expliquerez. Cette requête devra utiliser les concepts que nous avons étudié en cours et vu dans les exercices précédents.
-
-```sql
+WITH customer_total AS (SELECT customer_id, SUM(amount) as total_amount FROM payment GROUP BY customer_id), top_customers AS (SELECT customer_id, total_amount FROM customer_total ORDER BY total_amount DESC LIMIT 10) SELECT customer.customer_id, customer.first_name, customer.last_name, customer.email, top_customers.total_amount FROM customer INNER JOIN top_customers ON customer.customer_id=top_customers.customer_id ORDER BY top_customers.total_amount DESC;
 
 ```
